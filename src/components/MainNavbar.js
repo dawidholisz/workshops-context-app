@@ -1,9 +1,11 @@
 import React from 'react'
 import { useToggle } from 'react-use'
 import { Badge, Button, Collapse, Navbar, NavbarBrand, NavbarText, NavbarToggler } from 'reactstrap'
+import { useCart } from 'contexts/CartContext'
 
-const MainNavbar = ({ itemsInCart }) => {
+const MainNavbar = () => {
   const [isOpen, toggle] = useToggle(false)
+  const { itemsInCartCount } = useCart()
 
   return (
     <Navbar color="light" light expand="md">
@@ -11,9 +13,9 @@ const MainNavbar = ({ itemsInCart }) => {
       <NavbarToggler onClick={toggle}/>
       <Collapse isOpen={isOpen} navbar>
         <NavbarText>Context API</NavbarText>
-        {itemsInCart > 0 && (
+        {itemsInCartCount > 0 && (
           <Button color="primary" className="ms-auto me-1">
-            Items in cart <Badge color="success">{itemsInCart}</Badge>
+            Items in cart <Badge color="success">{itemsInCartCount}</Badge>
           </Button>)}
       </Collapse>
     </Navbar>
